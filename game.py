@@ -33,7 +33,7 @@ def run():
     #     b.x = i*100
     #     b.y = 100
     #     blocks.append(b)
-    # blocks = []
+    blocks = []
 
     def loadLevel(n):
         blocks = []
@@ -41,7 +41,7 @@ def run():
         level = levels[n]
         for i in range(len(level)):
             p = level[i]
-            b = Block(p[0], p[1])
+            b = Block(p[0], p[1], p[2])
             blocks.append(b)
         return blocks
 
