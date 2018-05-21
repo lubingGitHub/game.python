@@ -6,6 +6,8 @@ from ball import Ball
 from block import Block
 from utils import log
 from guagame import Guagame
+from level import (levels,
+                    )
 
 
 def run():
@@ -14,13 +16,34 @@ def run():
     paddle = Paddle()
     ball = Ball()
     paused = False
-    blocks = []
-    for i in range(3):
-        b = Block()
-        b.x = i*100
-        b.y = 100
-        blocks.append(b)
 
+
+    # def loadLevel(n):
+    #     blocks = []
+    #     n = n - 1
+    #     level = levels[n]
+    #     for i in range(len(level)):
+    #         p = level[i]
+    #         b = Block(p[0], p[1])
+    #         blocks.append(b)
+    #     return blocks
+    #
+    # for i in range(3):
+    #     b = Block()
+    #     b.x = i*100
+    #     b.y = 100
+    #     blocks.append(b)
+    # blocks = []
+
+    def loadLevel(n):
+        blocks = []
+        n = n - 1
+        level = levels[n]
+        for i in range(len(level)):
+            p = level[i]
+            b = Block(p[0], p[1])
+            blocks.append(b)
+        return blocks
 
     actions = {
         pygame.K_RIGHT: paddle.moveRight,
@@ -38,6 +61,12 @@ def run():
             elif event.type == KEYDOWN:
                 if event.key == pygame.K_p:
                     paused = not paused
+                elif event.key == pygame.K_1:
+                    blocks = loadLevel(1)
+                elif event.key == pygame.K_2:
+                    blocks = loadLevel(2)
+                elif event.key == pygame.K_3:
+                    blocks = loadLevel(3)
                 else:
                     keydowns[event.key] = True
             elif event.type == KEYUP:
@@ -52,25 +81,24 @@ def run():
             ball.move()
 
 
-
-        log('paused', paused)
         # 球和挡板相撞
         if paddle.collode(ball):
             ball.rebound()
+
+        game.clear()
+        game.draw(paddle)
+        game.draw(ball)
+
+        for i in range(len(blocks)):
+            block = blocks[i]
+            if block.alive:
+                game.draw(block)
 
         for i in range(len(blocks)):
             block = blocks[i]
             if block.collode(ball):
                 block.kill()
                 ball.rebound()
-
-        game.clear()
-        game.draw(paddle)
-        game.draw(ball)
-        for i in range(len(blocks)):
-            block = blocks[i]
-            if block.alive:
-                game.draw(block)
 
         fps_clock = pygame.time.Clock()
         fps_clock.tick(1000 / 30)
