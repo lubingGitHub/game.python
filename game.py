@@ -6,33 +6,16 @@ from ball import Ball
 from block import Block
 from utils import log
 from guagame import Guagame
-from level import (levels,
-                    )
+from level import levels
+from slider import slider_button
 
 
 def run():
     game = Guagame()
-
     paddle = Paddle()
     ball = Ball()
     paused = False
-
-
-    # def loadLevel(n):
-    #     blocks = []
-    #     n = n - 1
-    #     level = levels[n]
-    #     for i in range(len(level)):
-    #         p = level[i]
-    #         b = Block(p[0], p[1])
-    #         blocks.append(b)
-    #     return blocks
-    #
-    # for i in range(3):
-    #     b = Block()
-    #     b.x = i*100
-    #     b.y = 100
-    #     blocks.append(b)
+    # 这里不能注释， 局部变量
     blocks = []
 
     def loadLevel(n):
@@ -52,7 +35,7 @@ def run():
     }
 
     keydowns = {}
-
+    x_scroll1 = 55
 
     while True:
         for event in pygame.event.get():
@@ -72,6 +55,7 @@ def run():
             elif event.type == KEYUP:
                 keydowns[event.key] = False
 
+        # 调用的注册的函数
         for k in keydowns:
             if keydowns[k]:
                 if k in actions:
@@ -93,15 +77,14 @@ def run():
             block = blocks[i]
             if block.alive:
                 game.draw(block)
-
-        for i in range(len(blocks)):
-            block = blocks[i]
             if block.collode(ball):
                 block.kill()
                 ball.rebound()
 
+        x_scroll1 = slider_button((190, 190, 190))
+        pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll1 - 5, 258, 10, 24])
         fps_clock = pygame.time.Clock()
-        fps_clock.tick(1000 / 30)
+        fps_clock.tick(x_scroll1-10)
 
         pygame.display.update()
 
