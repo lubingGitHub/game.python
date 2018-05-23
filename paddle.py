@@ -23,9 +23,11 @@ class Paddle():
     def moveRight(self):
         self.move(self.x + self.speed)
 
-    def collode(self, ball):
-        if ball.y + ball.imageHeight > self.y:
-            if ball.x > self.x and ball.x < self.x + self.imageWidth:
-                return True
+    def aInb(self, x, x1, x2):
+        return x >= x1 and x <= x2
 
+    def collode(self, ball):
+        if self.aInb(self.x, ball.x, ball.x + ball.imageWidth) or self.aInb(ball.x, self.x, self.x+self.imageWidth):
+            if self.aInb(self.y, ball.y, ball.y + ball.imageHeight) or self.aInb(ball.y, self.y, self.y+self.imageHeight):
+                return True
         return False
