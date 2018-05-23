@@ -27,3 +27,12 @@ class Ball():
 
     def rebound(self):
         self.speedY *= -1
+
+    def hasPoint(self, x, y):
+        return self.xIn(x) and self.yIn(y)
+
+    def xIn(self, x):
+        return x >= self.x and x <= self.x + self.imageWidth
+
+    def yIn(self, y):
+        return y >= self.y and y <= self.y + self.imageHeight

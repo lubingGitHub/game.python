@@ -31,7 +31,11 @@ def run():
 
     score = 0
 
+
     while True:
+        cur = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 exit()
@@ -77,10 +81,20 @@ def run():
                 ball.rebound()
                 score += 100
 
+
+        if click[0] == 1:
+            log('在')
+            if ball.hasPoint(cur[0], cur[1]):
+                ball.x = cur[0]
+                ball.y = cur[1]
+
         x_scroll = slider_button(game.screen, (190, 190, 190), x_scroll)
         pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll - 5, 258, 10, 24])
         fps_clock = pygame.time.Clock()
         fps_clock.tick(x_scroll-10)
+
+        print(click[0])
+        print((cur[0]), cur[1])
 
         pygame.display.update()
 
