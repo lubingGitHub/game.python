@@ -1,12 +1,14 @@
-from utils import (imageFromPath,
-                    rectIntersects,
-                   log,)
+from utils import (
+    rectIntersects,
+    log,
+    imageByName,
+                   )
 
 class Block():
     def __init__(self, x=100, y=200, l=1):
         self.x = x
         self.y = y
-        self.image = imageFromPath('block.png')
+        self.image = imageByName('block')
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()
         self.alive = True
@@ -14,7 +16,6 @@ class Block():
 
     def kill(self):
         self.lives -= 1
-        log(self.lives)
         if self.lives < 1:
             self.alive = False
 

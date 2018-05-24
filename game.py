@@ -15,10 +15,8 @@ def run():
     paddle = Paddle()
     ball = Ball()
     paused = False
-    # 这里不能注释， 局部变量
+    # 这里不能注释， 有局部变量问题
     blocks = []
-
-
 
     actions = {
         pygame.K_RIGHT: paddle.moveRight,
@@ -83,18 +81,15 @@ def run():
 
 
         if click[0] == 1:
-            log('在')
             if ball.hasPoint(cur[0], cur[1]):
-                ball.x = cur[0]
-                ball.y = cur[1]
+                ball.x = cur[0] - (ball.imageWidth / 2)
+                ball.y = cur[1] - (ball.imageHeight / 2)
 
         x_scroll = slider_button(game.screen, (190, 190, 190), x_scroll)
         pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll - 5, 258, 10, 24])
         fps_clock = pygame.time.Clock()
         fps_clock.tick(x_scroll-10)
 
-        print(click[0])
-        print((cur[0]), cur[1])
 
         pygame.display.update()
 

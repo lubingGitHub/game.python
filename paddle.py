@@ -1,4 +1,4 @@
-from utils import imageFromPath
+from utils import imageByName
 
 
 class Paddle():
@@ -6,7 +6,7 @@ class Paddle():
         self.x = x
         self.y = y
         self.speed = speed
-        self.image = imageFromPath('paddle.png')
+        self.image = imageByName('paddle')
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()
 

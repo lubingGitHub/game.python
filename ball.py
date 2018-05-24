@@ -1,5 +1,5 @@
-from utils import imageFromPath
-
+from utils import imageByName
+# 侧面撞，相交的矩形的x，y 和ball 的纵坐标速度和横坐标速度比
 
 class Ball():
     def __init__(self, x=100, y=200, speed=10):
@@ -7,7 +7,7 @@ class Ball():
         self.y = y
         self.speedX = speed
         self.speedY = speed
-        self.image = imageFromPath('ball.png')
+        self.image = imageByName('ball')
         self.fired = False
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()

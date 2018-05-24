@@ -19,3 +19,4 @@ class Guagame():
         # 文本与颜色
         text = font.render('score: ' + str(score), 50, (0, 0, 0))
         self.screen.blit(text, (300,260))
+
