@@ -17,6 +17,8 @@ def images():
         'block': 'image/block.png',
         'paddle': 'image/paddle.png',
         'ball': 'image/ball.png',
+        'ball1': 'image/ball1.png',
+
     }
     return d
 

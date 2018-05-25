@@ -21,3 +21,4 @@ class Block():
 
     def collode(self, ball):
         return self.alive and (rectIntersects(ball, self) or rectIntersects(self, ball))
+

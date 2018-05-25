@@ -65,25 +65,32 @@ def run():
         if paddle.collode(ball):
             ball.rebound()
 
+
+        # 更新画面
+        # 这里可以做一个判断，
+        # 如果 game over， 那么 draw 游戏结束画面
+        # 不然 draw 正常情况
         game.clear()
         game.draw(paddle)
         game.draw(ball)
-        game.textBlit(score)
+        game.drawScore(score)
 
-        for i in range(len(blocks)):
-            block = blocks[i]
-            if block.alive:
-                game.draw(block)
-            if block.collode(ball):
-                block.kill()
-                ball.rebound()
-                score += 100
-
-
+        # 鼠标移动 ball 的位置
         if click[0] == 1:
             if ball.hasPoint(cur[0], cur[1]):
                 ball.x = cur[0] - (ball.imageWidth / 2)
                 ball.y = cur[1] - (ball.imageHeight / 2)
+
+        for b in blocks:
+            if b.alive:
+                game.draw(b)
+            if b.collode(ball):
+                b.kill()
+                ball.rebound()
+                score += 100
+
+        if ball.y > paddle.y:
+            break
 
         x_scroll = slider_button(game.screen, (190, 190, 190), x_scroll)
         pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll - 5, 258, 10, 24])
@@ -94,5 +101,24 @@ def run():
         pygame.display.update()
 
 
+def gameOver():
+    game = Guagame()
+
+    while True:
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                exit()
+
+
+
+
+        game.clear()
+        game.drawTips('game over')
+
+        pygame.display.update()
+
+
 if __name__ == '__main__':
     run()
+    gameOver()
