@@ -67,9 +67,7 @@ def run():
 
 
         # 更新画面
-        # 这里可以做一个判断，
-        # 如果 game over， 那么 draw 游戏结束画面
-        # 不然 draw 正常情况
+        
         game.clear()
         game.draw(paddle)
         game.draw(ball)

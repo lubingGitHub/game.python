@@ -25,4 +25,4 @@ class Guagame():
         font = pygame.font.Font(None, 20)
         # 文本与颜色
         text = font.render(text, 50, (0, 0, 0))
-        self.screen.blit(text, (150,150))
+        self.screen.blit(text, (150 ,150))
