@@ -12,6 +12,7 @@ def rectIntersects(a, b):
     return False
 
 
+# 使图片只载入一次
 def images():
     d = {
         'block': 'image/block.png',

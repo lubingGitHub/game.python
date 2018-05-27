@@ -1,4 +1,4 @@
-from block import Block
+from scene_package.block import Block
 
 def levels(n):
     levels = [
