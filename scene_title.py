@@ -13,11 +13,11 @@ def gameStart():
 
     while True:
         for event in pygame.event.get():
-            if event.type == QUIT:
-                exit()
-            elif event.type == KEYDOWN:
+            if event.type == KEYDOWN:
                 if event.key == pygame.K_k:
                     isStart = True
+                elif event.key == pygame.K_ESCAPE:
+                    exit()
 
 
         if isStart is True:
@@ -25,7 +25,7 @@ def gameStart():
 
 
         gameStart.clear()
-        gameStart.drawTips('press K to start')
+        gameStart.drawTips('press K to start', 150, 150)
 
         pygame.display.update()
 

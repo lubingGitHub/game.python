@@ -24,6 +24,7 @@ def loadLevel(n):
     level = levels(n)
     for i in range(len(level)):
         p = level[i]
+        print('坐标', p)
         b = Block(p[0], p[1], p[2])
         blocks.append(b)
     return blocks

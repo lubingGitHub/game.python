@@ -14,15 +14,13 @@ class Guagame():
         self.screen.blit(image.image, (image.x, image.y))
 
     def drawScore(self, score):
-        # 创建字体对象
-        font = pygame.font.Font(None, 20)
-        # 文本与颜色
-        text = font.render('score: ' + str(score), 50, (0, 0, 0))
-        self.screen.blit(text, (300,260))
+        score = 'score: ' + str(score)
+        self.drawTips(score, 300, 260)
 
-    def drawTips(self, text):
+
+    def drawTips(self, text, x, y):
         # 创建字体对象
         font = pygame.font.Font(None, 20)
         # 文本与颜色
         text = font.render(text, 50, (0, 0, 0))
-        self.screen.blit(text, (150 ,150))
+        self.screen.blit(text, (x ,y))

@@ -1,15 +1,15 @@
 import pygame
 from pygame.locals import *
 from sys import exit
-from utils import log
 from scene_package.paddle import Paddle
 from scene_package.ball import Ball
 from guagame import Guagame
 from scene_package.level import loadLevel
-from scene_package.slider import (slider_button,
-                                    timer,)
+from scene_package.slider import slider_button
 
-def gameRun():
+
+
+def ready():
     game = Guagame()
     paddle = Paddle()
     ball = Ball()
@@ -35,20 +35,16 @@ def gameRun():
     score = 0
 
 
+
     while True:
         cur = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
         for event in pygame.event.get():
             if event.type == KEYDOWN:
+                print(event.key)
                 if event.key == pygame.K_p:
                     paused = not paused
-                # elif event.key == pygame.K_1:
-                #     blocks = loadLevel(1)
-                # elif event.key == pygame.K_2:
-                #     blocks = loadLevel(2)
-                # elif event.key == pygame.K_3:
-                #     blocks = loadLevel(3)
                 else:
                     keydowns[event.key] = True
             elif event.type == KEYUP:
@@ -62,17 +58,12 @@ def gameRun():
                 elif k in actions_num:
                     blocks = actions_num[k]
 
-
-
-
         if paused is not True:
             ball.move()
-
 
         # 球和挡板相撞
         if paddle.collode(ball):
             ball.rebound()
-
 
         # 更新画面
 
@@ -87,7 +78,6 @@ def gameRun():
                 ball.x = cur[0] - (ball.imageWidth / 2)
                 ball.y = cur[1] - (ball.imageHeight / 2)
 
-
         for b in blocks:
             if b.alive:
                 game.draw(b)
@@ -96,17 +86,14 @@ def gameRun():
                 ball.rebound()
                 score += 100
 
-
-
-        # x_scroll = slider_button(game.screen, (190, 190, 190), x_scroll)
-        # pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll - 5, 258, 10, 24])
-        # fps_clock = pygame.time.Clock()
-        # fps_clock.tick(x_scroll-10)
-        x_scroll = timer(game.screen, x_scroll)
-
+        x_scroll = slider_button(game.screen, (190, 190, 190), x_scroll)
+        pygame.draw.rect(game.screen, ((190, 190, 190)), [x_scroll - 5, 258, 10, 24])
+        fps_clock = pygame.time.Clock()
+        fps_clock.tick(x_scroll - 10)
+        # timer(game.screen, x_scroll)
 
         pygame.display.update()
 
         # 游戏结束，跳出循坏
-        # if ball.y > paddle.y:
-        #     break
+        if ball.y > paddle.y:
+            break
