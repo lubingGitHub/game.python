@@ -9,7 +9,6 @@ def slider_button(screen, active_colour, x_scroll):
     if 110 > cur[0] > 10 and 284 > cur[1] > 258:
         if click[0] == 1:
             x_scroll = cur[0]
-    print('scroll', x_scroll)
     return x_scroll
 
 def timer(screen, button_scroll):

@@ -17,7 +17,6 @@ class Guagame():
         score = 'score: ' + str(score)
         self.drawTips(score, 300, 260)
 
-
     def drawTips(self, text, x, y):
         # 创建字体对象
         font = pygame.font.Font(None, 20)

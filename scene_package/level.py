@@ -24,9 +24,19 @@ def loadLevel(n):
     level = levels(n)
     for i in range(len(level)):
         p = level[i]
-        print('坐标', p)
         b = Block(p[0], p[1], p[2])
         blocks.append(b)
     return blocks
 
-
+def load(n):
+    path = 'level/{}.txt'.format(n)
+    with open(path, 'r') as f:
+        lines = f.readlines()
+        for b in lines:
+            prop = b.split(', ')
+            if len(prop) < 3:
+                prop.append('0')
+            x = int(prop[0])
+            y = int(prop[1])
+            live = int(prop[2])
+            self.blocks_props.append((x, y, live))

@@ -62,20 +62,14 @@ def gameRun():
                 elif k in actions_num:
                     blocks = actions_num[k]
 
-
-
-
         if paused is not True:
             ball.move()
-
 
         # 球和挡板相撞
         if paddle.collode(ball):
             ball.rebound()
 
-
         # 更新画面
-
         game.clear()
         game.draw(paddle)
         game.draw(ball)
