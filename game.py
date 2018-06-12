@@ -1,13 +1,10 @@
-# from scene import gameRun
-from scene_title import gameStart
-from scene_copy import gamerun
-from scene_title_copy import gametitle
-from scene_end_copy import gameend
+from go.game_run import gamerun
+from go.game_title import gametitle
+from go.game_end import gameend
 
 
 def run():
     while True:
-        # gameStart()
         gametitle()
         gamerun()
         gameend()

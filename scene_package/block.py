@@ -1,14 +1,13 @@
-from utils import (
+from scene_package.utils import (
     rectIntersects,
-    log,
-    imageByName,
+    image_by_name,
                    )
 
 class Block():
     def __init__(self, x=100, y=200, l=1):
         self.x = x
         self.y = y
-        self.image = imageByName('block')
+        self.image = image_by_name('block')
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()
         self.alive = True

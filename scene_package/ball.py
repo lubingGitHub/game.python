@@ -1,5 +1,6 @@
-from utils import imageByName
+from scene_package.utils import image_by_name
 # 侧面撞，相交的矩形的x，y 和ball 的纵坐标速度和横坐标速度比
+
 
 class Ball():
     def __init__(self, x=100, y=200, speed=10):
@@ -7,7 +8,7 @@ class Ball():
         self.y = y
         self.speedX = speed
         self.speedY = speed
-        self.image = imageByName('ball')
+        self.image = image_by_name('ball')
         self.fired = False
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()
@@ -28,7 +29,7 @@ class Ball():
     def rebound(self):
         self.speedY *= -1
 
-    def hasPoint(self, x, y):
+    def has_point(self, x, y):
         return self.xIn(x) and self.yIn(y)
 
     def xIn(self, x):

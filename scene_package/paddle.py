@@ -1,4 +1,4 @@
-from utils import imageByName
+from scene_package.utils import image_by_name
 
 
 class Paddle():
@@ -6,7 +6,7 @@ class Paddle():
         self.x = x
         self.y = y
         self.speed = speed
-        self.image = imageByName('paddle')
+        self.image = image_by_name('paddle')
         self.imageWidth = self.image.get_width()
         self.imageHeight = self.image.get_height()
 

@@ -1,7 +1,6 @@
 import pygame
 
 
-
 def slider_button(screen, active_colour, x_scroll):
     cur = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()

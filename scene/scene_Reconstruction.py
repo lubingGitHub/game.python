@@ -3,14 +3,15 @@ from pygame.locals import *
 from sys import exit
 from scene_package.paddle import Paddle
 from scene_package.ball import Ball
-from guagame import Guagame
-from scene_package.level import loadLevel
-from scene_package.slider import slider_button
+from scene.guagame import Guagame
+from scene_package.level import load_level
+from scene_package.slider import timer
 
 
 class Scene():
     def __init__(self):
         self.game = Guagame()
+        print('scene', id(self.game))
         self.paddle = Paddle()
         self.ball = Ball()
         self.paused = False
@@ -28,10 +29,11 @@ class Scene():
         }
 
         self.actions_num = {
-            pygame.K_1: loadLevel(1),
-            pygame.K_2: loadLevel(2),
-            pygame.K_3: loadLevel(3),
+            pygame.K_1: load_level(1),
+            pygame.K_2: load_level(2),
+            pygame.K_3: load_level(3),
         }
+
 
     def get_event(self):
         for event in pygame.event.get():
@@ -44,6 +46,7 @@ class Scene():
                 self.keydowns[event.key] = False
 
     def action(self):
+        # d = self.actions_num()
         # 调用的注册的函数
         for k in self.keydowns:
             if self.keydowns[k]:
@@ -76,26 +79,29 @@ class Scene():
                 self.ball.rebound()
                 self.score += 100
 
-
     def transited(self):
         if self.ball.y > self.paddle.y:
             self.is_transited = True
 
     def timer(self):
-        x_scroll = slider_button(self.game.screen, (190, 190, 190), self.x_scroll)
-        self.x_scroll = x_scroll
-        pygame.draw.rect(self.game.screen, ((190, 190, 190)), [self.x_scroll - 5, 258, 10, 24])
-        fps_clock = pygame.time.Clock()
-        fps_clock.tick(x_scroll - 10)
+        self.x_scroll = timer(self.game.screen, self.x_scroll)
         pygame.display.update()
 
-        # timer(game.screen, x_scroll)
+
+    def drag_ball(self):
+        cur = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if click[0] == 1:
+            if self.ball.has_point(cur[0], cur[1]):
+                self.ball.x = cur[0] - (self.ball.imageWidth / 2)
+                self.ball.y = cur[1] - (self.ball.imageHeight / 2)
 
     def begin(self):
         while self.is_transited is False:
             self.get_event()
             self.action()
             self.draw()
+            self.drag_ball()
             self.transited()
             self.update()
             self.timer()

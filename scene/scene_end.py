@@ -1,8 +1,6 @@
 import pygame
-from pygame.locals import *
 from sys import exit
-from guagame import Guagame
-from scene_basic import SceneBasic
+from scene.scene_basic import SceneBasic
 
 
 class SceneEnd(SceneBasic):
