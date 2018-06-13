@@ -11,3 +11,6 @@ class SceneEnd(SceneBasic):
             pygame.K_r: self.transited,
         }
 
+    def draw_tips(self):
+        self.game.drawTips('press R to restart', 150, 150)
+

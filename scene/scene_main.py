@@ -11,7 +11,6 @@ from scene_package.slider import timer
 class Scene():
     def __init__(self):
         self.game = Guagame()
-        print('scene', id(self.game))
         self.paddle = Paddle()
         self.ball = Ball()
         self.paused = False

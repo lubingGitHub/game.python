@@ -8,7 +8,6 @@ class SceneBasic:
     def __init__(self):
         self.is_transited = False
         self.game = Guagame()
-        print('basic', id(self.game), self.game)
 
         self.keydowns = {}
         self.actions = {
@@ -35,6 +34,9 @@ class SceneBasic:
     def draw(self):
         self.game.clear()
 
+    def draw_tips(self):
+        pass
+
     def update(self):
         pygame.display.update()
 
@@ -43,4 +45,5 @@ class SceneBasic:
             self.get_event()
             self.action()
             self.draw()
+            self.draw_tips()
             self.update()

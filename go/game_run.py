@@ -1,4 +1,4 @@
-from scene.scene_Reconstruction import Scene
+from scene.scene_main import Scene
 
 
 def gamerun():
