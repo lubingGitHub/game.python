@@ -8,7 +8,6 @@ class SceneBasic:
     def __init__(self):
         self.is_transited = False
         self.game = Guagame()
-
         self.keydowns = {}
         self.actions = {
             pygame.K_ESCAPE: exit,
