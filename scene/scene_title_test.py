@@ -1,27 +1,33 @@
 import pygame
+from pygame.locals import *
 from sys import exit
+from scene.guagame import Guagame
 from scene.scene_basic import SceneBasic
-# from scene.scene_title_test import SceneTitle
-from scene import SceneTitle
+from scene.scene_main_test import Scene
 
 
-class SceneEnd(SceneBasic):
+class SceneTitle(SceneBasic):
     def __init__(self):
         super().__init__()
         self.actions = {
             pygame.K_ESCAPE: exit,
-            pygame.K_r: self.transited,
+            pygame.K_k: self.transited,
         }
 
-    def draw_tips(self):
-        self.drawTips('press R to restart', 150, 150)
-
     def transited(self):
-        scene = SceneTitle()
+        scene = Scene()
         self.game.replace_scene(scene)
         self.game.begin()
 
+    def draw_tips(self):
+        self.drawTips('press K to start', 150, 150)
+
     def update(self):
+
         self.draw_tips()
         pygame.display.update()
+
+
+
+
 

@@ -1,7 +1,12 @@
 import pygame
 from pygame.locals import *
 from sys import exit
-from scene.guagame import Guagame
+# from scene.guagame import Guagame
+from scene.guagame_test import Guagame
+
+
+
+
 
 
 class SceneBasic:
@@ -27,8 +32,8 @@ class SceneBasic:
                 if k in self.actions:
                     self.actions[k]()
 
-    def transited(self):
-        self.is_transited = True
+    # def transited(self):
+    #     self.is_transited = True
 
     def draw(self):
         self.game.clear()
@@ -39,10 +44,17 @@ class SceneBasic:
     def update(self):
         pygame.display.update()
 
-    def begin(self):
-        while self.is_transited is False:
-            self.get_event()
-            self.action()
-            self.draw()
-            self.draw_tips()
-            self.update()
+    def drawTips(self, text, x, y):
+        # 创建字体对象
+        font = pygame.font.Font(None, 20)
+        # 文本与颜色
+        text = font.render(text, 50, (0, 0, 0))
+        self.game.screen.blit(text, (x, y))
+
+    # def begin(self):
+    #     while self.is_transited is False:
+    #         self.get_event()
+    #         self.action()
+    #         self.draw()
+    #         self.draw_tips()
+    #         self.update()

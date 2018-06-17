@@ -6,6 +6,7 @@ from scene_package.ball import Ball
 from scene.guagame_test import Guagame
 from scene_package.level import load_level
 from scene_package.slider import timer
+from scene import SceneEnd
 
 
 class Scene():
@@ -43,40 +44,43 @@ class Scene():
             elif event.type == KEYUP:
                 self.keydowns[event.key] = False
 
-    def paused(self):
-        for event in pygame.event.get():
-            if event.key == pygame.K_p:
-                self.paused = not self.paused
+    # def paused(self):
+    #     for event in pygame.event.get():
+    #         if event.key == pygame.K_p:
+    #             self.paused = not self.paused
 
-    def action(self):
-        # d = self.actions_num()
-        # 调用的注册的函数
-        for k in self.game.keydowns:
-            print('actions')
-            if self.game.keydowns[k]:
-                if k in self.game.actions_num:
-                    print('self.game.actions', self.game.actions)
-                    self.game.actions[k]()
-                elif k in self.game.actions_num:
-                    self.blocks = self.game.actions_num[k]
+    # def action(self):
+    #     # d = self.actions_num()
+    #     # 调用的注册的函数
+    #     for k in self.game.keydowns:
+    #         if self.game.keydowns[k]:
+    #             if k in self.game.actions_num:
+    #                 self.game.actions[k]()
+    #             elif k in self.game.actions_num:
+    #                 self.blocks = self.game.actions_num[k]
 
     def draw(self):
         self.game.clear()
         self.game.draw_image(self.paddle)
         self.game.draw_image(self.ball)
-        self.game.drawScore(self.score)
+        self.drawScore(self.score)
 
         for b in self.blocks:
             if b.alive:
                 self.game.draw_image(b)
 
-    def update(self):
-        # for event in pygame.event.get():
-        #     print('监听事件')
-        #     if event.type == KEYDOWN:
-        #         if event.key == pygame.K_p:
-        #             self.paused = not self.paused
+    def drawScore(self, score):
+        score = 'score: ' + str(score)
+        self.drawTips(score, 300, 260)
 
+    def drawTips(self, text, x, y):
+        # 创建字体对象
+        font = pygame.font.Font(None, 20)
+        # 文本与颜色
+        text = font.render(text, 50, (0, 0, 0))
+        self.game.screen.blit(text, (x, y))
+
+    def update(self):
         if self.paused is not True:
             self.ball.move()
 
@@ -90,9 +94,16 @@ class Scene():
                 self.ball.rebound()
                 self.score += 100
 
+        self.drag_ball()
+        self.load_level()
+        self.transited()
+        self.timer()
+
     def transited(self):
         if self.ball.y > self.paddle.y:
-            self.is_transited = True
+            scene = SceneEnd()
+            self.game.replace_scene(scene)
+            self.game.begin()
 
     def timer(self):
         self.x_scroll = timer(self.game.screen, self.x_scroll)
@@ -106,15 +117,7 @@ class Scene():
                 self.ball.x = cur[0] - (self.ball.imageWidth / 2)
                 self.ball.y = cur[1] - (self.ball.imageHeight / 2)
 
-    # def begin(self):
-    #     while self.is_transited is False:
-    #         self.get_event()
-    #         self.action()
-    #         self.draw()
-    #         self.drag_ball()
-    #         self.transited()
-    #         self.update()
-    #         self.timer()
-
-
-
+    def load_level(self):
+        for k in self.keydowns:
+                if k in self.actions_num:
+                    self.blocks = self.actions_num[k]

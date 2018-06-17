@@ -1,5 +1,6 @@
 import pygame
 
+
 class Guagame():
     pygame.init()
     pygame.display.set_caption("打砖块")
