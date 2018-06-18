@@ -1,8 +1,6 @@
 import pygame
 from sys import exit
 from scene.scene_basic import SceneBasic
-# from scene.scene_title_test import SceneTitle
-from scene import SceneTitle
 
 
 class SceneEnd(SceneBasic):
@@ -14,14 +12,5 @@ class SceneEnd(SceneBasic):
         }
 
     def draw_tips(self):
-        self.drawTips('press R to restart', 150, 150)
-
-    def transited(self):
-        scene = SceneTitle()
-        self.game.replace_scene(scene)
-        self.game.begin()
-
-    def update(self):
-        self.draw_tips()
-        pygame.display.update()
+        self.game.drawTips('press R to restart', 150, 150)
 

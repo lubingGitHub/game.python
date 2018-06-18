@@ -1,7 +1,5 @@
 import pygame
-from pygame.locals import *
 from sys import exit
-from scene.guagame import Guagame
 from scene.scene_basic import SceneBasic
 
 

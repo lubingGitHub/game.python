@@ -3,10 +3,9 @@ from pygame.locals import *
 from sys import exit
 from scene_package.paddle import Paddle
 from scene_package.ball import Ball
-from scene.guagame_test import Guagame
+from test.guagame_test import Guagame
 from scene_package.level import load_level
 from scene_package.slider import timer
-from scene import SceneEnd
 
 
 class Scene():

@@ -1,9 +1,7 @@
 import pygame
-from pygame.locals import *
 from sys import exit
-from scene.guagame import Guagame
-from scene.scene_basic import SceneBasic
-from scene.scene_main_test import Scene
+from test.scene_basic_test import SceneBasic
+from test.scene_main_test import Scene
 
 
 class SceneTitle(SceneBasic):
